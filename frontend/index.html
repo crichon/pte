@@ -1,0 +1,43 @@
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-responsive.css">
+  </head>
+  <body>
+    <div id="conatainer">
+      <div id="about"> 
+        <h1> Description du pte </h1>
+      </div>
+      <div id="assos">
+         <h1>Description des assos du pte </h1>
+      </div>
+      <div id="evts-conatiner">
+      </div>
+    </div>
+  </body>
+
+    <script type="text/template" id="evt-template">
+        <h2><%- type %> : <%- title %></h2>
+        <p> <%- if (type === conference) { ->
+            Le <%- date -> à <%- lieu ->.
+        <%- } else { ->
+            Du <%- date -> au <%- end_date ->.
+        <%- } ->
+        <br /> Branches: <%- branch ->
+        <br /> Inscrits: <%- student_count ->
+        </p>
+    </script>
+    <script src="/static/lib/jquery.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="/static/lib/underscore-min.js" type="text/javascript"></script>
+    <script src="/static/lib/backbone-min.js" type="text/javascript"></script>
+    <script src="/pte/frontend/config.js" type="text/javascript"></script>
+    <script src="/pte/frontend/model.js" type="text/javascript"></script>
+    <script src="/pte/frontend/view.js" type="text/javascript"></script>
+    <script src="/pte/frontend/app.js" type="text/javascript"></script>
+    <script src="/pte/frontend/routeur.js" type="text/javascript"></script>
+</html>
+
+
