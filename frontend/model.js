@@ -3,13 +3,13 @@
 var Evt = Backbone.Model.extend({});
 var Comment = Backbone.Model.extend({});
 
-var EvtList = BaseCollection.extend({
-        model: Item,
+var EvtList = Backbone.Collection.extend({
+        model: Evt,
         url : urlRoot + 'api/evt'
 });
 
-var CommentList = BaseCollection.extend({
-        model: Item,
+var CommentList = Backbone.Collection.extend({
+        model: Comment,
         url : urlRoot + 'api/comment'
 });
 

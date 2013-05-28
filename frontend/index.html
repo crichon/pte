@@ -6,27 +6,33 @@
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-responsive.css">
   </head>
   <body>
-    <div id="conatainer">
+    <div id="container">
+        <ul id="#menu">
+            <li><a href="pte/#/conference">Conference</a></li>
+            <li><a href="pte/#/concours">Concours</a></li>
+            <li><a href="pte/#/assos">Assos</a></li>
+            <li><a href="pte/#/about">A propos</a></li>
+        </ul>
       <div id="about"> 
         <h1> Description du pte </h1>
       </div>
       <div id="assos">
          <h1>Description des assos du pte </h1>
       </div>
-      <div id="evts-conatiner">
+      <div id="evts-container">
       </div>
     </div>
   </body>
 
     <script type="text/template" id="evt-template">
         <h2><%- type %> : <%- title %></h2>
-        <p> <%- if (type === conference) { ->
-            Le <%- date -> à <%- lieu ->.
-        <%- } else { ->
-            Du <%- date -> au <%- end_date ->.
-        <%- } ->
-        <br /> Branches: <%- branch ->
-        <br /> Inscrits: <%- student_count ->
+        <p> <% if (type === "conference"){ %>
+            Le <%- date %> à <%- lieu %>.
+        <% } else { %>
+            Du <%- date %> au <%- end_date %>.
+        <% } %>
+        <br /> Branches: <%- branch %>
+        <br /> Inscrits: <%- student_count %>
         </p>
     </script>
     <script src="/static/lib/jquery.min.js"></script>
