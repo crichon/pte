@@ -8,10 +8,10 @@
   <body>
     <div id="container">
         <ul id="#menu">
-            <li><a href="pte/#/conference">Conference</a></li>
-            <li><a href="pte/#/concours">Concours</a></li>
-            <li><a href="pte/#/assos">Assos</a></li>
-            <li><a href="pte/#/about">A propos</a></li>
+            <li><a href="./#/conference">Conference</a></li>
+            <li><a href="./#/concours">Concours</a></li>
+            <li><a href="./#/assos">Assos</a></li>
+            <li><a href="./#/about">A propos</a></li>
         </ul>
       <div id="about"> 
         <h1> Description du pte </h1>
@@ -27,9 +27,9 @@
     <script type="text/template" id="evt-template">
         <h2><%- type %> : <%- title %></h2>
         <p> <% if (type === "conference"){ %>
-            Le <%- date %> à <%- lieu %>.
+            Le <%- begin_date %> à <%- place %>.
         <% } else { %>
-            Du <%- date %> au <%- end_date %>.
+            Du <%- end_date %> au <%- end_date %>.
         <% } %>
         <br /> Branches: <%- branch %>
         <br /> Inscrits: <%- student_count %>

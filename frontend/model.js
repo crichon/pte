@@ -1,7 +1,21 @@
 // Model
 
-var Evt = Backbone.Model.extend({});
-var Comment = Backbone.Model.extend({});
+var MyModel =  Backbone.Model.extend({
+
+    save: function(method, model, options){ 
+		$.ajax({ 
+			type:"POST",
+			url:this.url,
+			data: $.param(this.toJSON())
+		});
+	}
+});
+
+var Evt = MyModel.extend({
+        url : urlRoot + 'api/evt'
+});
+
+var Comment = MyModel.extend({});
 
 var EvtList = Backbone.Collection.extend({
         model: Evt,
@@ -15,3 +29,4 @@ var CommentList = Backbone.Collection.extend({
 
 var Evts = new EvtList();
 var Comments = new CommentList();
+

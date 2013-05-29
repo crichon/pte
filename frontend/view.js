@@ -5,8 +5,9 @@ var EvtView = Backbone.View.extend({
         - lien pour l'inscription
 */
     tagName : "div",
-    className: this.model.get("type"),
     template: _.template( $('#evt-template').html() ),
+
+    intitialize: function() {},
 
     events: {
         'click .comment': 'toggleComment',
@@ -14,10 +15,11 @@ var EvtView = Backbone.View.extend({
     },
     
     render: function() {
-        this.$el.html(this.template(this.model.toJson()));
+        this.$el.html(this.template(this.model.toJSON()));
         // voir quel markup utilisé
+    var div = document.createElement('div');
     div.innerHTML = this.model.get('desc');
-    this.$('.content')).append( div );
+    this.$('.content').append( div );
     return this;
     }
 
