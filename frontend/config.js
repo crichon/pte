@@ -1,1 +1,1 @@
-var urlRoot = '';
+var urlRoot = '/pte/';

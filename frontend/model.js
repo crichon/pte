@@ -2,17 +2,30 @@
 
 var MyModel =  Backbone.Model.extend({
 
+
     save: function(method, model, options){ 
-		$.ajax({ 
-			type:"POST",
-			url:this.url,
-			data: $.param(this.toJSON())
-		});
-	}
+        
+        var id = this.get("id");
+		
+        if(id === null){
+            $.ajax({ 
+                type:  "POST", 
+                url: this.url,
+                data: $.param(this.toJSON())
+            });
+         }
+         else{
+            $.ajax({ 
+                type: "PUT",
+                url: this.url + "/" + id,
+                data: $.param(this.toJSON())
+            });
+        }	
+    }
 });
 
 var Evt = MyModel.extend({
-        url : urlRoot + 'api/evt'
+        //url : urlRoot + 'api/evt'
 });
 
 var Comment = MyModel.extend({});
@@ -29,4 +42,5 @@ var CommentList = Backbone.Collection.extend({
 
 var Evts = new EvtList();
 var Comments = new CommentList();
+
 
