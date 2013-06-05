@@ -4,23 +4,19 @@ var EvtView = Backbone.View.extend({
         - afficher les commentaires associés à un evt
         - lien pour l'inscription
 */
-    tagName : "div",
+    tagName : "li",
     template: _.template( $('#evt-template').html() ),
 
     intitialize: function() {},
 
     events: {
         'click .comment': 'toggleComment',
-        'click .studentsList': 'toggleStudentsList',
+        'click .studentsList': 'toggleStudentList',
     },
     
     render: function() {
         this.$el.html(this.template(this.model.toJSON()));
-        // voir quel markup utilisé
-    var div = document.createElement('div');
-    div.innerHTML = this.model.get('desc');
-    this.$('.content').append( div );
-    return this;
+        return this;
     }
 
 });

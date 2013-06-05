@@ -5,7 +5,6 @@ var AppView = Backbone.View.extend({
     events: {
     },
 
-
     initialize: function() {
       this.listenTo(Evts, 'add', this.addEvt);
       this.listenTo(Evts, 'reset', this.addEvts);
@@ -14,14 +13,14 @@ var AppView = Backbone.View.extend({
     },
 
     addEvt: function(evt) {
-        var view = new EvtView({model: evt, className: evt.get("type")});
-        $("#evts-container").append(view.render().el);
+        var view = new EvtView({model: evt, className: evt.get("type") + " event"});
+        $("#event-list").append(view.render().el);
     },
 
-    addComment: function(comment) {
-        var view = new CommentView({model: comment});
-        this.$("#comment" + this.model.get('evt_id')).append(view.render().el);
-    },
+    // addComment: function(comment) {
+    //     var view = new CommentView({model: comment});
+    //     this.$("#comment" + this.model.get('evt_id')).append(view.render().el);
+    // },
 
     addEvts: function (){ Evts.each(this.addEvt)},
     addComments: function (){ Evts.each(this.addComment)}

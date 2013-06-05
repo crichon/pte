@@ -2,6 +2,10 @@ function clean() {
         $('#evts-container').hide();
         $('#about').hide();
         $('#assos').hide();
+        $('#contact').hide();
+        $('#home').hide();
+        $('.concour').show();
+        $('.conference').show();
     }
 
 window.DocsRouter = Backbone.Router.extend({
@@ -9,17 +13,21 @@ window.DocsRouter = Backbone.Router.extend({
 // filtrage par type et branch ?
 
     routes: {
-        "": "init",
+        // "": "init",
+        "": "home",
         "conferences": "conferences",
         "concours": "concours",
         "about": "about",
-        "assos": "assos",
+        "pte": "assos",
+        "contact": "contact",
         ":branche" : "branche"
     },
 
-    init: function(){ clean();  $('#evts-container').show() },
+    // init: function(){ clean();  $('#evt-list').show() },
+    home: function(){ clean();  $('#home').show() },
 
     conferences: function() {
+        $('#evt-title')[0].innerHTML = "Les conférences";
         clean();
         $('#evts-container').show();
         $('.concour').hide();
@@ -27,6 +35,7 @@ window.DocsRouter = Backbone.Router.extend({
     
     concours: function() {
         clean();
+        $('#evt-title')[0].innerHTML = "Les concours"; 
         $('#evts-container').show();
         $('.conference').hide();
     },
@@ -47,6 +56,11 @@ window.DocsRouter = Backbone.Router.extend({
     assos: function() {
         clean()
         $('#assos').show();
+    },
+
+    contact: function() {
+        clean()
+        $('#contact').show();
     }
 });
 
