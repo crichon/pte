@@ -2,6 +2,7 @@
 
 var MyModel =  Backbone.Model.extend({
 
+    url: urlRoot + 'api/evt',
 
     save: function(method, model, options){ 
         
@@ -28,19 +29,18 @@ var Evt = MyModel.extend({
         //url : urlRoot + 'api/evt'
 });
 
-var Comment = MyModel.extend({});
+var Student = MyModel.extend({});
 
 var EvtList = Backbone.Collection.extend({
         model: Evt,
         url : urlRoot + 'api/evt'
 });
 
-var CommentList = Backbone.Collection.extend({
-        model: Comment,
-        url : urlRoot + 'api/comment'
+var StudentList = Backbone.Collection.extend({
+        model: Student,
+        url : urlRoot + 'api/student_by_evt'
 });
 
 var Evts = new EvtList();
-var Comments = new CommentList();
-
+var Students = new StudentList();
 

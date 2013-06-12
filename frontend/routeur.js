@@ -1,4 +1,6 @@
 function clean() {
+        //if (Evts.length < 1)
+            //Evts.fetch();
         $('#evts-container').hide();
         $('#about').hide();
         $('#assos').hide();
@@ -10,20 +12,41 @@ function clean() {
 
 window.DocsRouter = Backbone.Router.extend({
 
-// filtrage par type et branch ?
 
     routes: {
-        // "": "init",
         "": "home",
         "conferences": "conferences",
         "concours": "concours",
+        "evt/:id": "byId",
+        "concours/list/:id": "showList",
         "about": "about",
         "pte": "assos",
         "contact": "contact",
-        ":branche" : "branche"
+        "*other" : "other"
     },
 
-    // init: function(){ clean();  $('#evt-list').show() },
+    other: function() { this.home(); },
+
+    showList: function (id) {
+        $(".modal-body > ul").empty();
+        var myList = Students.where({evt_id: id});
+        var li = null;
+        if (myList.length > 0){
+            for (var i = 0; i < myList.length; i++) {
+                li = document.createElement('li');
+                li.innerHTML = myList[i].get("student");
+                $(".modal-body > ul").append(li);
+            }
+        }
+        else {
+                li = document.createElement('li');
+                li.innerHTML = "Pas d'étudients inscrits pour le moment"; 
+                $(".modal-body > ul").append(li);
+        }
+            
+        $('#listModal').modal();
+    },
+
     home: function(){ clean();  $('#home').show() },
 
     conferences: function() {
@@ -40,12 +63,12 @@ window.DocsRouter = Backbone.Router.extend({
         $('.conference').hide();
     },
 
-    branche: function(branche) {
+    byId: function(id) {
         clean();
         $('#evts-container').show();
-        $('.conference').hide();
         $('.concour').hide();
-        $('.' + branche).show(); // evt view on type et branche en class
+        $('.conference').hide();
+        $('#evt' + id).show();
     },
 
     about: function() {

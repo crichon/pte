@@ -44,8 +44,6 @@ var AdminView = Backbone.View.extend({
     initialize: function(){
           this.listenTo(Evts, 'add', this.addEvt);
           this.listenTo(Evts, 'reset', this.addEvts);
-          this.listenTo(Comments, 'reset', this.addComments);
-          this.listenTo(Comments, 'add', this.addComment);
     },
 
     newEvents: function(){
@@ -69,8 +67,10 @@ var AdminView = Backbone.View.extend({
             student_count: 0,
             branch: $('input[name="branch"]').val()
         });
-
-        newEvt.save();
+        
+        if (newEvt.get("id") === null)
+            Evts.create(newEvt);
+        //newEvt.save();
     },
 
     addEvt: function(evt) {
@@ -81,26 +81,25 @@ var AdminView = Backbone.View.extend({
         $("#list-container").append(listView.render().el);
     },
 
-    addComment: function(comment) {
-    },
-
-    addEvts: function (){ 
-        Evts.each(this.addEvt)},
-    addComments: function (){ 
-        Evts.each(this.addComment)}
+    addEvts: function(){ Evts.each(this.addEvt()); }
 
 })
 
 var admin = new AdminView();
 
+function clean() { 
+    $('#list-container').hide(); 
+    $('#container').hide();
+    $('#item-container').hide();
+    $('.updateEvt').hide();
+}
+
 window.DocsRouter = Backbone.Router.extend({
 
     routes: {
-        "": function(id){ $('#list-container').show(); $('#item-container').hide(); $('.updateEvt').hide(); },
-        "update/:id": function(id) { 
-            $('#list-container').hide(); 
-            $('#item-container').show();
-            $('#updateEvt' + id).show();}
+        "": function(){ clean(); $('#list-container').show(); },
+        "update/:id": function(id) { clean(); $('#item-container').show(); $('#updateEvt' + id).show();},
+        "add": function() { clean(); $('#container').show(); }
     }
 })
 

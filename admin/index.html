@@ -1,8 +1,42 @@
 <html>
     <head>
         <title> Admin pte </title>
+
+<!-- Le styles -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300italic|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+<link href="../css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/font-awesome.css">
+<!--[if IE 7]>
+  <link rel="stylesheet" href="css/font-awesome-ie7.css">
+<![endif]-->
+<link href="../css/bootstrap-responsive.css" rel="stylesheet">
+<!-- <link href="../css/app.css" rel="stylesheet"> -->
+<link href="../css/small.css" rel="stylesheet">
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<![endif]-->
+
+<!-- Fav and touch icons -->
+<link rel="shortcut icon" href="img/favicon.png">
     </head>
     <body>
+
+        <ul class="nav">
+          <li><a href="./#">List</a></li>
+          <li><a href="./#/add">Ajouter un evt</a></li>
+        </ul>
+
+        <div id="fileUpload">
+            <form action="upload_file.php" method="post"
+            enctype="multipart/form-data">
+            <label for="file">Filename:</label>
+            <input type="file" name="file" id="file"><br>
+            <input type="submit" name="submit" value="Submit">
+            </form>
+        </div>
+
         <div id="container">
             <layout> Titre <input type="text" name="title" /></layout><br />
             <layout> Conférences <input type="radio" name="type" value="conference" /></layout>
@@ -11,11 +45,12 @@
             <layout> Branches <input type="text" name="branch" /></layout><br />
             <layout> Decription <input type="textaera" name="desc" /></layout><br />
             <button id="submitEvt" />Submit</button>
+            <a href="./#"> Retour </a>
             <!-- datepicker -->
-            <div id="list-container"></div>
-            <div id="item-container"></div>
         </div>
-    <script type="text/template" id="evt-template">
+        <div id="list-container"></div>
+        <div id="item-container"></div>
+        <script type="text/template" id="evt-template">
         
             <layout> Titre <input type="text" name="title" value="<%- title %>"/></layout><br />
             <layout> Conférences <input type="radio" name="type" value="conference" /></layout>
@@ -24,6 +59,7 @@
             <layout> Branches <input type="text" name="branch" value="<%- branch %>" /></layout><br />
             <layout> Decription <input type="textaera" name="desc" value="<%- description %>" /></layout><br />
             <a href="./#"> Retour </a>
+            <button id="updateEvt" />Submit</button>
     </script>
     <script type="text/template" id="list-template">
         <a href="./#/update/<%- id %>"><%- title %></a><button class="delete"> Supprimer ? </button>

@@ -29,6 +29,17 @@
 </head>
 
 <body>
+    <div id="listModal" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Modal header</h3>
+      </div>
+      <div class="modal-body">
+        <ul></ul>
+      </div>
+    </div>
+
+
 
     <div id="container" class="container">
       <div class="row">
@@ -367,11 +378,11 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script type="text/template" id="evt-template">
-        <h3 class="event-title condensed"><%- type %> : <%- title %></h3>
+        <h3 class="event-title condensed"><a href="./#/evt/<%- id %>"> <%- type %> : <%- title %></a></h3>
         <div class="event-content">
           <div class="event-info">
             <div class="row-fluid">
-              <div class="event-img span6"><img src="img/ecomarathon.jpg" class="img-polaroid"/></div>
+                <div class="event-img span6"><img src="<%- img_path %>" class="img-polaroid"/></div>
               <dl class="span6">
               <% if (type === "conference"){ %>
                 <dt class="date">Date </dt>
@@ -382,7 +393,7 @@
                 <dt class="date">Date de fin de dépôt des dossiers</dt>
                 <dd class="date-info"><%- end_date %></dd>
                 <dt class="pdf">Informations complémentaires</dt>
-                <dd class="pdf-info"><i class="img-circle icon-file-alt"></i><a href="concours/dossier.pdf">Titre du pdf</a></dd>
+                <dd class="pdf-info"><i class="img-circle icon-file-alt"></i><a href="<%- pdf_path %>"><%- pdf_title %></a></dd>
               <% } %>
                 <dt class="participate"><a href="https://cas.utc.fr/cas/login?service=http://192.168.1.181/pte/backend/inscription.php?evt_id=<%- id %>"><button class="btn">Participer</button></a></dt>
                 <dt class="branche">Branche</dt>
@@ -392,17 +403,20 @@
           </div>
           <div class="event-desc">
             <%- description %>
+              <% if (type !== "conference"){ %>
+            <br /><a href="./#/concours/list/<%- id %>">Liste des inscrits</a>
+            <% } %>
           </div>
         </div>
     </script>
 
-    <script src="/static/lib/jquery.min.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-    <script src="/static/lib/underscore-min.js" type="text/javascript"></script>
-    <script src="/static/lib/backbone-min.js" type="text/javascript"></script>
-    <script src="/pte/frontend/config.js" type="text/javascript"></script>
-    <script src="/pte/frontend/model.js" type="text/javascript"></script>
-    <script src="/pte/frontend/view.js" type="text/javascript"></script>
-    <script src="/pte/frontend/app.js" type="text/javascript"></script>
-    <script src="/pte/frontend/routeur.js" type="text/javascript"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="lib/underscore-min.js" type="text/javascript"></script>
+    <script src="lib/backbone-min.js" type="text/javascript"></script>
+    <script src="frontend/config.js" type="text/javascript"></script>
+    <script src="frontend/model.js" type="text/javascript"></script>
+    <script src="frontend/view.js" type="text/javascript"></script>
+    <script src="frontend/app.js" type="text/javascript"></script>
+    <script src="frontend/routeur.js" type="text/javascript"></script>
 </html>

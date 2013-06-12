@@ -8,24 +8,19 @@ var AppView = Backbone.View.extend({
     initialize: function() {
       this.listenTo(Evts, 'add', this.addEvt);
       this.listenTo(Evts, 'reset', this.addEvts);
-      this.listenTo(Comments, 'reset', this.addComments);
-      this.listenTo(Comments, 'add', this.addComment);
+      Evts.fetch();
+      Students.fetch();
+      // retrieve inscription list order by evt id and add it in dic with evt_d as key and an array of login as value
     },
 
     addEvt: function(evt) {
-        var view = new EvtView({model: evt, className: evt.get("type") + " event"});
+        var view = new EvtView({model: evt, id:"evt" + evt.get("id"), className: evt.get("type") + " event"});
+        // hide or unhide evt depending on the url
         $("#event-list").append(view.render().el);
     },
 
-    // addComment: function(comment) {
-    //     var view = new CommentView({model: comment});
-    //     this.$("#comment" + this.model.get('evt_id')).append(view.render().el);
-    // },
-
     addEvts: function (){ Evts.each(this.addEvt)},
-    addComments: function (){ Evts.each(this.addComment)}
 
 })
 
 var appView = new AppView({});
-Evts.fetch();

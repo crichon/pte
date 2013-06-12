@@ -22,7 +22,8 @@ function check_auth($data, $evt_id){
     if (preg_match("/cas:authenticationSuccess/", $data)){
         if( preg_match($pattern, $data, $user)){ 
 
-            $student = $user[0];
+            $student = $user[1];
+            echo $student;
 
             try{
                 $db = new PDO('mysql:host=localhost;dbname=test', 'root', 'chichon');
@@ -35,8 +36,10 @@ function check_auth($data, $evt_id){
                 $statement = "insert into student_by_evt (evt_id, student) values (:evt_id, :student)";
                 $q = $db->prepare($statement);
                 echo $q->execute(array(':evt_id'=>$evt_id, ':student'=>$student));
+                header('Location: /pte/#/inscription/1');
             }catch (PDOEXCEPTION $e){
                 echo 'insert failed'.$e->getMessage();
+                header('Location: /pte/#/inscription/0');
             }
             return $user[0];
         }
