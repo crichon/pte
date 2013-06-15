@@ -32,7 +32,7 @@
     <div id="listModal" class="modal hide fade">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Modal header</h3>
+        <h3>Liste des participants</h3>
       </div>
       <div class="modal-body">
         <ul></ul>
@@ -395,7 +395,7 @@
                 <dt class="pdf">Informations complémentaires</dt>
                 <dd class="pdf-info"><i class="img-circle icon-file-alt"></i><a href="<%- pdf_path %>"><%- pdf_title %></a></dd>
               <% } %>
-                <dt class="participate"><a href="https://cas.utc.fr/cas/login?service=http://192.168.1.181/pte/backend/inscription.php?evt_id=<%- id %>"><button class="btn">Participer</button></a></dt>
+                <dt class="participate"><a href="https://cas.utc.fr/cas/login?service=http://assos.utc.fr/polete/backend/inscription.php?evt_id=<%- id %>"><button class="btn">Participer</button></a></dt>
                 <dt class="branche">Branche</dt>
                 <dd class="branche-info"><%- branch %></dd>
               </dl>
@@ -411,7 +411,7 @@
     </script>
 
     <script src="lib/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="lib/underscore-min.js" type="text/javascript"></script>
     <script src="lib/backbone-min.js" type="text/javascript"></script>
     <script src="frontend/config.js" type="text/javascript"></script>
