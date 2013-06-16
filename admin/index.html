@@ -6,12 +6,23 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300italic|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 <link href="../css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="../lib/editor/bootstrap-wysihtml5.css"></link>
 <!--[if IE 7]>
   <link rel="stylesheet" href="css/font-awesome-ie7.css">
 <![endif]-->
 <link href="../css/bootstrap-responsive.css" rel="stylesheet">
 <!-- <link href="../css/app.css" rel="stylesheet"> -->
 <link href="../css/small.css" rel="stylesheet">
+<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"></link> -->
+
+
+<link rel="stylesheet" type="text/css" href="../lib/editor/libs/css/bootstrap-wysihtml5.css"></link>
+<link rel="stylesheet" type="text/css" href="../lib/editor/libs/css/bootstrap.min.css"></link>
+<script src="../lib/editor/libs/js/wysihtml5.js"></script>
+<script src="../lib/editor/libs/js/jquery.min.js"></script>
+<script src="../lib/editor/libs/js/bootstrap.min.js"></script>
+<script src="../lib/editor/libs/js/bootstrap-wysihtml5.min.js"></script>
+
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -22,6 +33,16 @@
 <link rel="shortcut icon" href="img/favicon.png">
     </head>
     <body>
+
+    <div id="listModal" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Modal header</h3>
+      </div>
+      <div class="modal-body">
+        <ul></ul>
+      </div>
+  </div>
 
         <ul class="nav">
           <li><a href="./#">List</a></li>
@@ -42,8 +63,17 @@
             <layout> Conférences <input type="radio" name="type" value="conference" /></layout>
             <layout> Concours <input type="radio" name="type" value="concour" /></layout> <br />
             <layout> Lieu <input type="text" name="place" /></layout><br />
-            <layout> Branches <input type="text" name="branch" /></layout><br />
-            <layout> Decription <input type="textaera" name="desc" /></layout><br />
+            <layout> Branches 
+                <input type="checkbox" name="branch" value="gi"/> gi
+                <input type="checkbox" name="branch" value="gb"/> gb
+                <input type="checkbox" name="branch" value="gp"/> gp
+                <input type="checkbox" name="branch" value="gm"/> gm
+                <input type="checkbox" name="branch" value="gsm"/> gsm
+                <input type="checkbox" name="branch" value="gsu"/> gsu
+            </layout><br />
+            <!-- <input id="editor" type="textaera" name="desc" /> <br /> -->
+                    <textarea id="editor" class="textarea" name="desc" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+
             <button id="submitEvt" />Submit</button>
             <a href="./#"> Retour </a>
             <!-- datepicker -->
@@ -57,17 +87,16 @@
             <layout> Concours <input type="radio" name="type" value="concour" /></layout> <br />
             <layout> Lieu <input type="text" name="place" value="<%- place %>"/></layout><br />
             <layout> Branches <input type="text" name="branch" value="<%- branch %>" /></layout><br />
-            <layout> Decription <input type="textaera" name="desc" value="<%- description %>" /></layout><br />
+            <layout> Decription <input edit="edit<%- id %>" type="textaera" name="desc" value="<%- description %>" /></layout><br />
             <a href="./#"> Retour </a>
             <button id="updateEvt" />Submit</button>
     </script>
     <script type="text/template" id="list-template">
-        <a href="./#/update/<%- id %>"><%- title %></a><button class="delete"> Supprimer ? </button>
+        <a href="./#/update/<%- id %>"><%- title %></a>
+        <a href="./#/evt/<%- id %>">Liste des inscrits</a>
+        <button class="delete"> Supprimer ? </button>
     </script>
     </body>
-    <script src="/static/lib/jquery.min.js"></script>
-    <script src="/static/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-    <script src="/pte/lib/editor/bootstrap-wysiwyg.js"></script>
     <script src="/static/lib/underscore-min.js" type="text/javascript"></script>
     <script src="/static/lib/backbone-min.js" type="text/javascript"></script>
     <script src="/pte/frontend/config.js" type="text/javascript"></script>
