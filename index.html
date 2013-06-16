@@ -74,14 +74,17 @@
         <div id="evts-container">
           <div class=" box">
             <div class="row-fluid">
+              <div id="alerts"></div>
               
               <section class="left-title span1 large">
               </section>
 
               <section class="span10">
                 <div class="title condensed">
-                    <h2 id="evt-title">Les concours</h2>
-                </div>
+                    <h2><span id="evt-title">Les concours</span><span id="filterBranch">
+                    <a href="./#/concours/gi">gi</a>, <a href="./#/concours/gb">gb</a>, <a href="./#/concours/gp">gp</a>, 
+                    <a href="./#/concours/gm">gm</a>, <a href="./#/concours/gsm">gsm</a>, <a href="./#/concours/gsu">gsu</a>, 
+                    </span></h2></div>
                 <ul id="event-list" class="event-list">
               </section>
             </div>
@@ -94,6 +97,7 @@
               
               <section class="left-title span1 large">
               </section>
+
 
               <section class="span10">
                 <div class="title condensed">
@@ -411,7 +415,8 @@
     </script>
 
     <script src="lib/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="lib/editor/bootstrap-wysiwyg.js"></script>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
     <script src="lib/underscore-min.js" type="text/javascript"></script>
     <script src="lib/backbone-min.js" type="text/javascript"></script>
     <script src="frontend/config.js" type="text/javascript"></script>
