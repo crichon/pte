@@ -74,6 +74,7 @@ window.DocsRouter = Backbone.Router.extend({
         }
             
         $('#listModal').modal();
+        router.navigate('/concours', true);
     },
 
     home: function(){ clean();  $('#home').show() },
