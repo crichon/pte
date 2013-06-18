@@ -20,17 +20,17 @@ var EvtListView = Backbone.View.extend({
 
 });
 
-var EvtView = Backbone.View.extend({
+//var EvtView = Backbone.View.extend({
     
-    tagName : "div",
-    template: _.template( $('#evt-template').html() ),
+    //tagName : "div",
+    //template: _.template( $('#evt-template').html() ),
     
-    render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
-        return this;
-    }
+    //render: function() {
+        //this.$el.html(this.template(this.model.toJSON()));
+        //return this;
+    //}
 
-});
+//});
 
 
 var AdminView = Backbone.View.extend({
@@ -38,7 +38,6 @@ var AdminView = Backbone.View.extend({
 
     events:{
           'click #submitEvt': "newEvents",
-          'click #updateEvt': "newEvents"
     },
 
     initialize: function(){
@@ -51,41 +50,45 @@ var AdminView = Backbone.View.extend({
 
     newEvents: function(){
 
-		var $inputs = $('#container :input');
+		var $inputs = $('#addForm :input');
 
 		//var values = {};
 		//$inputs.each(function() {
 			//values[this.name] = $(this).val();
         //});
         
+        var id = null;
+        if($('#addForm :input[name="id"]').val() !== 0)
+            id = $('#addForm :input[name="id"]').val();
+        
         var branch = "";
         // retrieve branch value
-        $('#container :input[name="branch"]:checked').each(function(){ 
+        $('#addForm :input[name="branch"]:checked').each(function(){ 
             branch += this.getAttribute("value") + " ";})
         
         var newEvt = new Evt({
-            id: null,
-            title: $('#container :input[name="title"]').val(),
-            description:  $('#container :input[name="desc"]').val(),
-            type:  $('#container :input[name="type"]').val(),
-            place:  $('#container :input[name="place"]').val(),
-            begin_date: $('#container :input[name="begin_date"]').val(),
-            end_date: $('#container :input[name="end_date"]').val(),
-            img_path: $('#container :input[name="img_path"]').val(),
-            pdf_path: $('#container :input[name="pdf_path"]').val(),
+            id: id,
+            title: $('#addForm :input[name="title"]').val(),
+            description:  $('#addForm :input[name="description"]').val(),
+            type:  $('#addForm :input[name="type"]').val(),
+            place:  $('#addForm :input[name="place"]').val(),
+            begin_date: $('#addForm :input[name="begin_date"]').val(),
+            end_date: $('#addForm :input[name="end_date"]').val(),
+            img_path: $('#addForm :input[name="img_path"]').val(),
+            pdf_path: $('#addForm :input[name="pdf_path"]').val(),
             branch: branch
         });
         
         if (newEvt.get("id") === null)
             Evts.create(newEvt);
-        //newEvt.save();
+        else{
+            newEvt.save();
+            Evts.add(newEvt, {merge: true});
+        }
     },
 
     addEvt: function(evt) {
         var listView = new EvtListView({model: evt, className: evt.get("type")});
-        var evtView = new EvtView({model: evt, id: "updateEvt" + evt.get("id"), className: "updateEvt" });
-        evtView.$el.hide();
-        $("#item-container").append(evtView.render().el);
         $("#list-container").append(listView.render().el);
     },
 
@@ -99,15 +102,14 @@ function clean() {
     $('#list-container').hide(); 
     $('#container').hide();
     $('#listModal').hide();
-    $('#item-container').hide();
-    $('.updateEvt').hide();
 }
 
 window.DocsRouter = Backbone.Router.extend({
 
     routes: {
         "": function(){ clean(); $('#list-container').show(); },
-        "update/:id": function(id) { clean(); $('#item-container').show(); $('#updateEvt' + id).show(); $('#edit'+ id).wysihtml5()},
+        "update/:id": "update", 
+    //function(id) { clean(); $('#item-container').show(); $('#updateEvt' + id).show(); $('#edit'+ id).wysihtml5()},
         "add": function() { clean(); $('#container').show(); },
         "evt/:id": "showList"
     },
@@ -132,6 +134,36 @@ window.DocsRouter = Backbone.Router.extend({
         $('#listModal').modal();
         router.navigate('');
     },
+
+    update: function(id){
+		clean();
+        $('#container').show();
+        var evt = Evts.get(id);
+        var branch = evt.get("branch").split(" ");
+        var $inputs = $('#addForm :input');
+
+        //  set id  
+        $('#addForm :input[name="id"]').val(evt.get("id"));
+        // set type
+        $('#addForm :input[value="' + evt.get("type") + '"]')[0].checked = true;
+        // $('#addForm :input[name="description"]').val();
+        var editorInstance = $('#addForm :input[name="description"]').data("wysihtml5").editor
+        editorInstance.setValue(evt.get("description"));
+        // var div = document.createElement('div');
+        // div.innerHTML = evt.get('description');
+        // $('#editor').append( div );
+  
+        // set branch and text input
+        $inputs.each(function() {
+            if (this.type === "text")
+                this.value = evt.get(this.name);
+            else if (this.type === "checkbox")
+                if (branch.indexOf(this.value) >= 0 )
+                    this.checked = true;
+            // console.log(this);
+        });
+
+    }
 })
 
 router = new DocsRouter();

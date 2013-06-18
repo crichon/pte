@@ -1,6 +1,6 @@
 <?php
 $allowedExts = array("gif", "jpeg", "jpg", "png");
-$DestinationDirectory   = 'pte';
+$DestinationDirectory   = '../img';
 $DirectoryPublicPath = "/pte";
 
 $resut = array('img_path' => '', 'pdf_path' => '');
@@ -10,7 +10,7 @@ if (isset($_FILES['MyImg'])){
     $Size      = $_FILES['MyImg']['size']; // Obtain original image size
     $TempSrc        = $_FILES['MyImg']['tmp_name']; // Tmp name of image file stored in PHP tmp folder
     $Type      = $_FILES['MyImg']['type']; //Obtain file type, returns
-    move_uploaded_file($_FILES["MyImg"]["tmp_name"], $DestinationDirectory. $_FILES["MyImg"]["name"]);
+    move_uploaded_file($_FILES["MyImg"]["tmp_name"], $DestinationDirectory."/".$_FILES["MyImg"]["name"]);
     $result['img_path'] = $DirectoryPublicPath."/".$Name;
     
 }

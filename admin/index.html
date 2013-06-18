@@ -67,6 +67,7 @@
                 <div id="output"></div>
             </div>
             <div id="addForm">
+            <input type="hidden" name="id" value="0" />
             <layout> Titre <input type="text" name="title" /></layout><br />
             <layout> Conférences <input type="radio" name="type" value="conferences" /></layout>
             <layout> Concours <input type="radio" name="type" value="concours" /></layout> <br />
@@ -84,25 +85,13 @@
                 <input type="checkbox" name="branch" value="gsu"/> gsu
             </layout><br />
             <!-- <input id="editor" type="textaera" name="desc" /> <br /> -->
-                    <textarea id="editor" class="textarea" name="desc" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+                    <textarea id="editor" class="textarea" name="description" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
 
             <button id="submitEvt" />Submit</button>
             <a href="./#"> Retour </a>
             <!-- datepicker -->
     </div></div>
         <div id="list-container"></div>
-        <div id="item-container"></div>
-        <script type="text/template" id="evt-template">
-        
-            <layout> Titre <input type="text" name="title" value="<%- title %>"/></layout><br />
-            <layout> Conférences <input type="radio" name="type" value="conference" /></layout>
-            <layout> Concours <input type="radio" name="type" value="concour" /></layout> <br />
-            <layout> Lieu <input type="text" name="place" value="<%- place %>"/></layout><br />
-            <layout> Branches <input type="text" name="branch" value="<%- branch %>" /></layout><br />
-            <layout> Decription <input edit="edit<%- id %>" type="textaera" name="desc" value="<%- description %>" /></layout><br />
-            <a href="./#"> Retour </a>
-            <button id="updateEvt" />Submit</button>
-    </script>
     <script type="text/template" id="list-template">
         <a href="./#/update/<%- id %>"><%- title %></a>
         <a href="./#/evt/<%- id %>">Liste des inscrits</a>
