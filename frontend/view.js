@@ -10,6 +10,7 @@ var EvtView = Backbone.View.extend({
     
     render: function() {
         this.$el.html(this.template(this.model.toJSON()));
+        this.$el.addClass(this.model.get("branch"));
         return this;
     }
 

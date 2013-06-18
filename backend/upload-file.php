@@ -1,40 +1,26 @@
 <?php
 $allowedExts = array("gif", "jpeg", "jpg", "png");
-$extension = end(explode(".", $_FILES["file"]["name"]));
-if ((($_FILES["file"]["type"] == "image/gif")
-|| ($_FILES["file"]["type"] == "image/jpeg")
-|| ($_FILES["file"]["type"] == "image/jpg")
-|| ($_FILES["file"]["type"] == "image/pjpeg")
-|| ($_FILES["file"]["type"] == "image/x-png")
-|| ($_FILES["file"]["type"] == "image/png"))
-&& ($_FILES["file"]["size"] < 20000)
-&& in_array($extension, $allowedExts))
-  {
-  if ($_FILES["file"]["error"] > 0)
-    {
-    echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
-    }
-  else
-    {
-    echo "Upload: " . $_FILES["file"]["name"] . "<br>";
-    echo "Type: " . $_FILES["file"]["type"] . "<br>";
-    echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-    echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br>";
+$DestinationDirectory   = '../img';
+$DirectoryPublicPath = "/pte";
 
-    if (file_exists("upload/" . $_FILES["file"]["name"]))
-      {
-      echo $_FILES["file"]["name"] . " already exists. ";
-      }
-    else
-      {
-      move_uploaded_file($_FILES["file"]["tmp_name"],
-      "img/" . $_FILES["file"]["name"]);
-      echo "Stored in: " . "img/" . $_FILES["file"]["name"];
-      }
-    }
-  }
-else
-  {
-  echo "Invalid file";
-  }
+$resut = array('img_path' => '', 'pdf_path' => '');
+
+if (isset($_FILES['MyImg'])){
+    $Name = str_replace(' ','-',strtolower($_FILES['MyImg']['name']));
+    $Size      = $_FILES['MyImg']['size']; // Obtain original image size
+    $TempSrc        = $_FILES['MyImg']['tmp_name']; // Tmp name of image file stored in PHP tmp folder
+    $Type      = $_FILES['MyImg']['type']; //Obtain file type, returns
+    move_uploaded_file($_FILES["MyImg"]["tmp_name"], $DestinationDirectory."/".$_FILES["MyImg"]["name"]);
+    $result['img_path'] = $DirectoryPublicPath."/".$Name;
+    
+}
+if (isset($_FILES['MyPdf'])){
+    $Name = str_replace(' ','-',strtolower($_FILES['MyPdf']['name']));
+    $Size      = $_FILES['MyPdf']['size']; // Obtain original image size
+    $TempSrc        = $_FILES['MyPdf']['tmp_name']; // Tmp name of image file stored in PHP tmp folder
+    $Type      = $_FILES['MyPdf']['type']; //Obtain file type, returns
+    move_uploaded_file($_FILES["MyPdf"]["tmp_name"], $DestinationDirectory."/".$_FILES["MyPdf"]["name"]);
+    $result['pdf_path'] = $DirectoryPublicPath."/".$Name;
+}
+echo json_encode($result);
 ?>
