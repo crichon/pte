@@ -36,14 +36,14 @@ window.DocsRouter = Backbone.Router.extend({
         "about": "about",
         "pte": "assos",
         "contact": "contact",
-        "inscription/:bool": "inscription",
+        "inscription/:bool/:evt_id": "inscription",
         "*other" : "other"
     },
 
-    inscription: function(bool){
+    inscription: function(bool, evt_id){
         clean();
         var data = "";
-        if (bool === "0"){
+        if (bool === 0){
             data += "Erreur, veuillez vérifier que vous ne vous êtes pas déjà inscrit. <br /> Sinon merci de nous signaler le problème";
             handleAlerts("alert alert-failure", data);
         }
@@ -51,7 +51,7 @@ window.DocsRouter = Backbone.Router.extend({
             data = "Inscription pris en compte, merci.";
             handleAlerts("alert alert-info", data);
         }
-        this.concours();
+        router.navigate("evt/" + evt_id, {trigger: true});
     },
 
     other: function() { this.home(); },
@@ -69,7 +69,7 @@ window.DocsRouter = Backbone.Router.extend({
         }
         else {
                 li = document.createElement('li');
-                li.innerHTML = "Pas d'étudients inscrits pour le moment"; 
+                li.innerHTML = "Pas d'étudiant inscrit pour le moment"; 
                 $(".modal-body > ul").append(li);
         }
             
@@ -116,21 +116,28 @@ window.DocsRouter = Backbone.Router.extend({
         $('#evts-container').show();
         $('.conferences').hide();
         $('.concours').hide();
-        $('.' + branch + '.concours').show();
+        $('.' + branch.toUpperCase() + '.concours').show();
     },
     
     conferencesByBranch: function(branch) {
         clean();
-        $('#evt-title')[0].innerHTML = "Les concours"; 
+        $('#evt-title')[0].innerHTML = "Les conférences"; 
         
         $('#evts-container').show();
         $('.conferences').hide();
         $('.concours').hide();
-        $('.' + branch + '.conferences').show();
+        $('.' + branch.toUpperCase() + '.conferences').show();
     },
 
     byId: function(id) {
         clean();
+        $('#evt-title')[0].innerHTML = "Les " + Evts.get(id).get("type"); 
+        var list = $('#filterBranch > a');
+        var tmp = "";
+        for( var i = 0; i < list.length; i++){
+            tmp = list[i].getAttribute("href");
+            list[i].setAttribute("href", "./#/" + Evts.get(id).get("type") + "/" + tmp.split("/")[3]);
+	}
         $('#evts-container').show();
         $('.concours').hide();
         $('.conferences').hide();
@@ -154,4 +161,4 @@ window.DocsRouter = Backbone.Router.extend({
 });
 
 router = new DocsRouter();
-Backbone.history.start();
+

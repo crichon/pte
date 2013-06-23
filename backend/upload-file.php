@@ -1,7 +1,7 @@
 <?php
 $allowedExts = array("gif", "jpeg", "jpg", "png");
-$DestinationDirectory   = '../img';
-$DirectoryPublicPath = "/pte";
+$DestinationDirectory   = '../files';
+$DirectoryPublicPath = "files";
 
 $resut = array('img_path' => '', 'pdf_path' => '');
 

@@ -4,7 +4,7 @@ $_CONFIG['cas_url'] = 'https://cas.utc.fr/cas/';
 $ticket = $_GET['ticket'];
 $evt_id = $_GET['evt_id'];
 
-$service = 'http://192.168.1.181/pte/backend/inscription.php?evt_id='.$evt_id;
+$service = 'http://assos.utc.fr/polete/backend/inscription.php?evt_id='.$evt_id;
 
 function authenticate($service, $ticket, $evt_id) {
 		global $_CONFIG;
@@ -26,7 +26,7 @@ function check_auth($data, $evt_id){
             echo $student;
 
             try{
-                $db = new PDO('mysql:host=localhost;dbname=test', 'root', 'chichon');
+                $db = new PDO('mysql:host=sql.mde.utc;dbname=polete', 'polete', 'sd6MyD2yhcFqweGe');
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
                 echo "mysql connection ok";
             }catch (PDOEXCEPTION $e){
@@ -36,10 +36,10 @@ function check_auth($data, $evt_id){
                 $statement = "insert into student_by_evt (evt_id, student) values (:evt_id, :student)";
                 $q = $db->prepare($statement);
                 echo $q->execute(array(':evt_id'=>$evt_id, ':student'=>$student));
-                header('Location: /pte/#/inscription/1');
+                header('Location: /polete/#/inscription/1/'.$evt_id);
             }catch (PDOEXCEPTION $e){
                 echo 'insert failed'.$e->getMessage();
-                header('Location: /pte/#/inscription/0');
+                header('Location: /polete/#/inscription/0');
             }
             return $user[0];
         }

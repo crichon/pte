@@ -43,8 +43,8 @@
       <div class="row">
       <div class="span10 offset1">
           <div class="banner">
-            <h3 class="muted">PTE</h3>
-            <h4 class="muted">Pôle Technologie et Entreprenariat</h4>
+            <h3 class="muted hide_title">PTE</h3>
+            <h4 class="muted hide_title">Pôle Technologie et Entreprenariat</h4>
           </div>
           <div class="navbar">
             <div class="navbar-inner">
@@ -59,7 +59,7 @@
                     <li class="active"><a href="./#">Accueil</a></li>
                     <li><a href="./#/concours">Concours</a></li>
                     <li><a href="./#/conferences">Conférences</a></li>
-                    <li><a href="./#/pte">Assos</a></li>
+                    <li><a href="./#/pte">Le pôle</a></li>
                     <li><a href="./#/contact">Contact</a></li>
                     <li><a href="./#/about">A Propos</a></li>
                   </ul>
@@ -71,19 +71,30 @@
         <!-- Jumbotron -->
         <div id="evts-container">
           <div class=" box">
+            <div id="alerts"></div>
             <div class="row-fluid">
-              <div id="alerts"></div>
+              
               
               <section class="left-title span1 large">
               </section>
 
               <section class="span10">
                 <div class="title condensed">
-                    <h2><span id="evt-title">Les concours</span><span id="filterBranch">
-                    <a href="./#/concours/gi">gi</a>, <a href="./#/concours/gb">gb</a>, <a href="./#/concours/gp">gp</a>, 
-                    <a href="./#/concours/gm">gm</a>, <a href="./#/concours/gsm">gsm</a>, <a href="./#/concours/gsu">gsu</a>, 
+                    <h2><span id="evt-title">Les concours</span>
+
+                    <span id="filterBranch" class="pull-right">
+                      <a href="./#/concours/gi">gi</a>,
+                      <a href="./#/concours/gb">gb</a>,
+                      <a href="./#/concours/gp">gp</a>, 
+                      <a href="./#/concours/gm">gm</a>,
+                      <a href="./#/concours/gsm">gsm</a>,
+                      <a href="./#/concours/gsu">gsu</a>,
+                      <a href="./#/concours/tc">tc</a>
                     </span></h2></div>
                 <ul id="event-list" class="event-list">
+                </ul>
+              </section>
+              <section class="right-title span1 large">
               </section>
             </div>
           </div>
@@ -109,27 +120,6 @@
                   </ol>
                   <!-- Carousel items -->
                   <div class="carousel-inner">
-                    <div class="active item">
-                      <img src="img/smartgrids.jpg" alt="image"/>
-                      <div class="carousel-caption span5 offset4">
-                        <h3>Third Thumbnail label</h3>
-                        <p class="more"><i class="icon-link"></i> <a href="">Détails</a></p>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <img src="img/ecomarathon.jpg" alt="image">
-                      <div class="carousel-caption span5 offset4">
-                        <h3>Third Thumbnail label</h3>
-                        <p class="more"><i class="icon-link"></i> <a href="">Détails</a></p>
-                      </div>
-                    </div>
-                    <div class="item">
-                      <img src="img/humanitech.jpg" alt="image"/>
-                      <div class="carousel-caption span5 offset4">
-                        <h3>Third Thumbnail label</h3>
-                        <p class="more"><i class="icon-link"></i> <a href="">Détails</a></p>
-                      </div>
-                    </div>
                   </div>
                   <a class="carousel-control left" href="#last-events-carousel" data-slide="prev">&lsaquo;</a>
                   <a class="carousel-control right" href="#last-events-carousel" data-slide="next">&rsaquo;</a>
@@ -147,14 +137,14 @@
           <div class="row">
             <div class="span5 box">
               <div class="row-fluid">
-                <section class="left-title span1 large">
-                </section>
+                <section class="left-title span1 large"></section>
                 <section class="span10">
                   <div class="title condensed">
                     <h2>En bref</h2>
                   </div>
                   <div class="content">
                     <p>Le Pôle Technologique et Entreprenariat est un pôle chargé de la fédération d'une partie des associations de l'UTC. Ces associations ont pour activité commune l'intégration de l'entreprenariat et de la technologie au sein de l'université.</p>
+                    <a href="https://www.facebook.com/poletechnologie.entrepreneriat" target="_blank"><img src="img/facebook.jpg" alt="Retrouvez nous sur Facebook"/></a>
                   </div>
                 </section>
                 <section class="right-title span1 large">
@@ -176,8 +166,7 @@
 </p>
                   </div>
                 </section>
-                <section class="right-title span1 large">
-                </section>
+                <section class="right-title span1 large"></section>
            </div>
           </div>
           <div class="clearfix"></div>
@@ -234,28 +223,28 @@
                   <ul class="member-list">
                     <div class="row-fluid">  
                       <li class="span3">
-                        <div class="member">
+                        <div class="member" id="president">
                           <img class="img-polaroid" src="img/members/president.jpg" alt="member picture"/>
                           <h5>Président</h5>
                           <p>Le président est garant de la bonne conduite des projets, fait le lien entre les associations du PTE avec le BDE et l'administration.</p>
                         </div>
                       </li>
                       <li class="span3">
-                        <div class="member">
+                        <div class="member" id="tresorier">
                           <img class="img-polaroid" src="img/members/tresorier.jpg" alt="member picture"/>
                           <h5>Trésorier</h5>
                           <p>Le trésorier a la responsabilité des comptes du PTE ainsi que des comptes des projets, clubs et commission.</p>
                         </div>
                       </li>
                       <li class="span3">
-                        <div class="member">
+                        <div class="member" id="secretaire">
                           <img class="img-polaroid" src="img/members/secretaire.jpg" alt="member picture"/>
                           <h5>Secrétaire Général</h5>
                           <p>Le secrétaire générale est chargé du suivi et du conseil administratif auprès des associations PTE.</p>
                         </div>
                       </li>
                       <li class="span3">
-                        <div class="member">
+                        <div class="member" id="respcomm">
                           <img class="img-polaroid" src="img/members/respcomm.jpg" alt="member picture"/>
                           <h5>Resp comm'</h5>
                           <p>Le responsable communication est chargé d'établir la communication du PTE ainsi que d'aider les associations du PTE à communiquer.</p>
@@ -264,7 +253,7 @@
                     </div>
                     <div class="row-fluid">
                       <li class="span3">
-                        <div class="member">
+                        <div class="member" id="respconf">
                           <img class="img-polaroid" src="img/members/respconferences.jpg" alt="member picture"/>
                           <h5>Resp conférences</h5>
                           <p>Le responsable conférences est là pour organiser des conférences sur les thèmes établis en partenariat avec les associations du PTE et l'administration.</p>
@@ -370,7 +359,7 @@
           <div class="clearfix"></div>
       </div><!-- About -->
     <footer class="footer">
-      Pôle Technologie et Entreprenariat - <a href="http://utc.fr" title="utc.fr">UTC</a> (2013)
+      Pôle Technologie et Entreprenariat - <a href="admin">Admin</a> - <a href="http://wwwassos.utc.fr/">Portail des assos</a> - <a href="http://utc.fr" title="utc.fr">UTC</a> (2013)
     </footer>
     </div> <!--  -->
   </div> <!-- /container -->
@@ -380,18 +369,20 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <script type="text/template" id="evt-template">
-        <h3 class="event-title condensed"><a href="./#/evt/<%- id %>"> <%- type %> : <%- title %></a></h3>
+        <h3 class="event-title condensed"><a href="./#/evt/<%- id %>"> <%- title %></a></h3>
         <div class="event-content">
           <div class="event-info">
             <div class="row-fluid">
                 <div class="event-img span6"><img src="<%- img_path %>" class="img-polaroid"/></div>
               <dl class="span6">
-              <% if (type === "conference"){ %>
+              <% if (type === "conferences"){ %>
                 <dt class="date">Date </dt>
                 <dd class="date-info"><%- begin_date %></dd>
                 <dt class="place">Lieu </dt>
                 <dd class="date-info"><%- place %></dd>
               <% } else { %>
+                <dt class="date">Date de début</dt>
+                <dd class="date-info"><%- begin_date %></dd>
                 <dt class="date">Date de fin de dépôt des dossiers</dt>
                 <dd class="date-info"><%- end_date %></dd>
                 <dt class="pdf">Informations complémentaires</dt>
@@ -403,13 +394,21 @@
               </dl>
             </div>
           </div>
-          <div class="event-desc">
-            <%- description %>
-              <% if (type !== "conference"){ %>
-            <br /><a href="./#/concours/list/<%- id %>">Liste des inscrits</a>
+          <div class="event-desc"></div>
+	  <div>
+              <% if (type === "concours"){ %>
+            <br /><a href="./#/concours/list/<%- id %>"> Liste des inscrits</a>
             <% } %>
           </div>
         </div>
+      </div>
+    </script>
+    <script type="text/template" id="carousel-template">
+                      <img src="<%- img_path %>" alt="image">
+                      <div class="carousel-caption span5 offset4">
+                        <h3><%- title %></h3>
+                        <p class="more"><i class="icon-link"></i> <a href="./#/evt/<%- id %>">Détails</a></p>
+                      </div>
     </script>
 
     <script src="lib/jquery.min.js"></script>

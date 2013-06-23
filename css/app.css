@@ -11,6 +11,9 @@ body{
 body>.container{
   background-color: #FFF;
 }
+.hide_title{
+  opacity: 0;
+}
 .condensed{
   font-family: 'Open Sans Condensed', "Helvetica Neue",​Helvetica,​Arial,​sans-serif
 }

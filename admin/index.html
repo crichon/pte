@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title> Admin pte </title>
-
+        <title>Admin PTE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
 <!-- Le styles -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300italic|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 <link href="../css/bootstrap.css" rel="stylesheet">
@@ -13,17 +15,19 @@
   <link rel="stylesheet" href="css/font-awesome-ie7.css">
 <![endif]-->
 <link href="../css/bootstrap-responsive.css" rel="stylesheet">
-<!-- <link href="../css/app.css" rel="stylesheet"> -->
-<link href="../css/small.css" rel="stylesheet">
-<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"></link> -->
 
-
-<link rel="stylesheet" type="text/css" href="../lib/editor/libs/css/bootstrap-wysihtml5.css"></link>
 <link rel="stylesheet" type="text/css" href="../lib/editor/libs/css/bootstrap.min.css"></link>
-<script src="../lib/editor/libs/js/wysihtml5.js"></script>
+<style type="text/css">
+  [class^="icon-"], [class*=" icon-"]{
+    background-image: none;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="../lib/editor/bootstrap-wysihtml5.css"></link>
+
 <script src="../lib/editor/libs/js/jquery.min.js"></script>
 <script src="../lib/editor/libs/js/bootstrap.min.js"></script>
-<script src="../lib/editor/libs/js/bootstrap-wysihtml5.min.js"></script>
+<script src="../lib/editor/libs/js/wysihtml5.min.js"></script>
+<script src="../lib/editor/bootstrap-wysihtml5.min.js"></script>
 
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -38,71 +42,175 @@
     <script src="http://malsup.github.com/jquery.form.js"></script> 
 
 <!-- <script type="text/javascript" src="js/jquery.form.js"></script> -->
- <link href="style/style.css" rel="stylesheet" type="text/css" />
+ <!-- <link href="style/style.css" rel="stylesheet" type="text/css" /> -->
 </head>
-<body>
+<body id="main">
 
-    <div id="listModal" class="modal hide fade">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Modal header</h3>
-      </div>
-      <div class="modal-body">
-        <ul></ul>
-      </div>
+<div id="listModal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Liste des inscrits</h3>
   </div>
-
+  <div class="modal-body">
+    <ul></ul>
+  </div>
+</div>
+    <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <a class="brand" href="/polete">PTE</a>
         <ul class="nav">
-          <li><a href="./#">List</a></li>
-          <li><a href="./#/add">Ajouter un evt</a></li>
+          <li><a href="./#">Liste</a></li>
+          <li><a href="./#/add">Ajouter un événement</a></li>
+          <li><a href="./#/menbres">Membres</a></li>
         </ul>
-
-        <div id="container">
-            <div id="Wrapper">
-                <form action="/pte/backend/upload-file.php" method="post" enctype="multipart/form-data" id="UploadForm">
-                    <input name="MyImg" type="file" />
-                    <input name="MyPdf" type="file" />
-                    <!-- <input type="submit"  id="SubmitButton" value="Upload" /> -->
-                </form>
-                <div id="output"></div>
-            </div>
-            <div id="addForm">
+    </div>
+    </div>
+    <div class="container">
+        <div id="alerts"></div>
+    	<div id="menber-container">
+            <div class="form-actions">
+                <button id="submitMenber" class="btn btn-primary"/>Valider</button>
+                <a href="./#" class="btn"> Annuler </a>
+	    </div>
+	</div>
+    	<div id="container">
+        <div id="addForm" class="form-horizontal">
             <input type="hidden" name="id" value="0" />
-            <layout> Titre <input type="text" name="title" /></layout><br />
-            <layout> Conférences <input type="radio" name="type" value="conferences" /></layout>
-            <layout> Concours <input type="radio" name="type" value="concours" /></layout> <br />
-            <layout> Le / Du <input type="text" class="datepicker" name="begin_date" /></layout><br />
-            <layout> Au <input type="text" class="datepicker" name="end_date" /></layout><br />
-            <layout> Lieu <input type="text" name="place" /></layout><br />
-            <layout> Img <input type="text" name="img_path" /></layout></br>
-            <layout> Pdf <input type="text" name="pdf_path" /></layout></br>
-            <layout> Branches 
-                <input type="checkbox" name="branch" value="gi"/> gi
-                <input type="checkbox" name="branch" value="gb"/> gb
-                <input type="checkbox" name="branch" value="gp"/> gp
-                <input type="checkbox" name="branch" value="gm"/> gm
-                <input type="checkbox" name="branch" value="gsm"/> gsm
-                <input type="checkbox" name="branch" value="gsu"/> gsu
-            </layout><br />
-            <!-- <input id="editor" type="textaera" name="desc" /> <br /> -->
-                    <textarea id="editor" class="textarea" name="description" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+            
+            <div class="control-group">
+                <label class="control-label" for="title">Titre</label>
+                <div class="controls">
+                    <layout><input type="text" id="title" name="title"></layout>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label" for="type">Type d'événement</label>
+                <div class="controls">
+                    <label class="radio">
+                        <layout> Conférences <input type="radio" name="type" value="conferences" /></layout>
+                    </label>
+                    <label class="radio">
+                        <layout> Concours <input type="radio" name="type" value="concours" /></layout>
+                    </label>
+                </div>
+            </div>
 
-            <button id="submitEvt" />Submit</button>
-            <a href="./#"> Retour </a>
-            <!-- datepicker -->
-    </div></div>
-        <div id="list-container"></div>
-    <script type="text/template" id="list-template">
-        <a href="./#/update/<%- id %>"><%- title %></a>
-        <a href="./#/evt/<%- id %>">Liste des inscrits</a>
-        <button class="delete"> Supprimer ? </button>
-    </script>
+            <div class="control-group">
+                <label class="control-label" for="begin_date">Le / Du</label>
+                <div class="controls">
+                    <layout><input type="text" class="datepicker" name="begin_date" id="begin_date" /></layout>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="end_date">Au</label>
+                <div class="controls">
+                    <layout><input type="text" class="datepicker" name="end_date" id="end_date" /></layout>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="place">Lieu</label>
+                <div class="controls">
+                    <layout><input type="text" name="place" id="place" /></layout>
+                </div>
+            </div>
+
+            
+
+            <div id="Wrapper">
+                <form action="../backend/upload-file.php" method="post" enctype="multipart/form-data" id="UploadForm" class="form-horizontal">
+<div id="output"></div>
+<div id="spinner"></div>
+                    <div class="control-group">
+                        <label class="control-label" for="img_path">Image</label>
+                        <div class="controls">
+                            <layout><input name="MyImg" type="file" /></layout>
+                            <layout><input type="hidden" name="img_path" id="img_path" /></layout>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="pdf_path">PDF</label>
+                        <div class="controls">
+                            <layout><input name="MyPdf" type="file" /></layout>
+                            <layout><input type="hidden" name="pdf_path" id="pdf_path" /></layout>
+                        </div>
+                    </div>              
+                </form>
+                <!--<div id="output"></div>-->
+            </div>
+
+            <layout>
+            <div class="control-group">
+                <label class="control-label">Branches</label>
+                <div class="controls">
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="branch" value="gb"> GB
+                    </label>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="branch" value="gi"> GI
+                    </label>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="branch" value="gm"> GM
+                    </label>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="branch" value="gp"> GP
+                    </label>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="branch" value="gsm"> GSM
+                    </label>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="branch" value="gsu"> GSU
+                    </label>
+                    <label class="checkbox inline">
+                      <input type="checkbox" name="branch" value="tc"> TC 
+                    </label>
+                </div>
+            </div>
+            </layout>
+
+            <!-- <input id="editor" type="textaera" name="desc" /> <br /> -->
+                    <textarea id="editor" class="textarea" name="description" placeholder="La description de l'événement" style="width: 810px; height: 200px"></textarea>
+
+            <div class="form-actions">
+                <button id="submitEvt" class="btn btn-primary"/>Valider</button>
+                <a href="./#" class="btn"> Annuler </a>
+            </div>
+            
+        </div>
+        </div>
+        <table id="list-container" class="table table-striped">
+            <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Liste des inscrits</th>
+              <th>Editer</th>
+              <th>Supprimer</th>
+            </tr>
+          </thead>
+        </table>
+        <script type="text/template" id="list-template">
+                <td><a href="/polete/#/evt/<%- id %>" target="_blank"><%- title %></a></td>
+                <td><a href="./#/evt/<%- id %>"><i class="icon-list-alt"></i> </a></td>
+                <td><a href="./#/update/<%- id %>"><i class="icon-edit"></i> </a></td>
+                <td><a href="#" class="delete" onclick="return false;"><i class="icon-trash"></i></a></td>
+
+        </script>
+        <script type="text/template" id="menber-template">
+            <div class="control-group">
+                <label class="control-label" for="<%- type %>"><%- type %></label>
+                <div class="controls">
+                    <layout><input type="text" name="<%- type %>" id="<%- type %>" value="<%- name %>" /></layout>
+                </div>
+            </div>
+        </script>
+    </div>
     </body>
     <script src="../lib/underscore-min.js" type="text/javascript"></script>
     <script src="../lib/backbone-min.js" type="text/javascript"></script>
     <script src="../frontend/config.js" type="text/javascript"></script>
     <script src="../frontend/model.js" type="text/javascript"></script>
     <script src="admin.js" type="text/javascript"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </html>
